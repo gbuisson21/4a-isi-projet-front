@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Menus — Kfet Polytech Dijon</title>
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Scripts communs (ordre important), puis le script de la page -->
+  <script src="js/api.js" defer></script>
+  <script src="js/utils.js" defer></script>
+  <script src="js/mock.js" defer></script>
+  <script src="js/auth.js" defer></script>
+  <script src="js/catalog-api.js" defer></script>
+  <script src="js/orders-api.js" defer></script>
+  <script src="js/cart.js" defer></script>
+  <script src="js/layout.js" defer></script>
+  <script src="js/menus.js" defer></script>
+</head>
+<body>
+  <header class="header" id="site-header"></header>
+
+  <main>
+    <h1>Nos menus</h1>
+    <p class="subtitle">Les formules de la Kfet, moins chères que les produits à l'unité.</p>
+
+    <div class="toolbar">
+      <input class="input" id="search" type="search" placeholder="Rechercher un menu ou un produit…" aria-label="Rechercher un menu ou un produit">
+      <label class="toolbar__field">Le <input class="input input--date" id="date" type="date" aria-label="Disponibles le"></label>
+      <button class="btn" id="today" type="button">Aujourd'hui</button>
+      <button class="btn btn--primary" id="all" type="button">Tous</button>
+    </div>
+
+    <section class="grid grid--menus" id="menus" aria-live="polite"></section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mes réservations — Kfet Polytech Dijon</title>
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Scripts communs (ordre important), puis le script de la page -->
+  <script src="js/api.js" defer></script>
+  <script src="js/utils.js" defer></script>
+  <script src="js/mock.js" defer></script>
+  <script src="js/auth.js" defer></script>
+  <script src="js/catalog-api.js" defer></script>
+  <script src="js/orders-api.js" defer></script>
+  <script src="js/cart.js" defer></script>
+  <script src="js/layout.js" defer></script>
+  <script src="js/qrcode.js" defer></script>
+  <script src="js/reservations.js" defer></script>
+</head>
+<body>
+  <header class="header" id="site-header"></header>
+
+  <main class="main--narrow">
+    <h1>Mes réservations</h1>
+    <p class="subtitle">Présentez le QR code au comptoir lors du retrait. Le paiement se fait sur place.</p>
+
+    <p class="flash" id="flash" role="status" hidden></p>
+
+    <section class="card auth-card">
+      <div class="tabs" role="tablist">
+        <button class="tabs__tab" type="button" role="tab" id="tab-upcoming" aria-controls="panel-upcoming" aria-selected="true">À récupérer</button>
+        <button class="tabs__tab" type="button" role="tab" id="tab-history" aria-controls="panel-history" aria-selected="false">Historique</button>
+      </div>
+      <div class="reservations" id="panel-upcoming" role="tabpanel" aria-labelledby="tab-upcoming" aria-live="polite"></div>
+      <div class="reservations" id="panel-history" role="tabpanel" aria-labelledby="tab-history" hidden></div>
+    </section>
+  </main>
+
+  <!-- QR code en grand -->
+  <dialog class="dialog dialog--small" id="qr-dialog" aria-labelledby="qr-dialog-title">
+    <div class="dialog__head">
+      <h2 id="qr-dialog-title">Mon QR code</h2>
+      <button class="btn" type="button" data-close aria-label="Fermer">✕</button>
+    </div>
+    <div class="dialog__body qr-dialog">
+      <div class="qr-dialog__code" id="qr-dialog-code"></div>
+      <p class="qr-dialog__info" id="qr-dialog-info"></p>
+      <p class="auth-card__hint">À présenter au comptoir de la Kfet lors du retrait.</p>
+      <p class="qr-dialog__demo">QR code fictif : la validation par scan arrivera plus tard.</p>
+    </div>
+  </dialog>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mon compte — Kfet Polytech Dijon</title>
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Scripts communs (ordre important), puis le script de la page -->
+  <script src="js/api.js" defer></script>
+  <script src="js/utils.js" defer></script>
+  <script src="js/mock.js" defer></script>
+  <script src="js/auth.js" defer></script>
+  <script src="js/catalog-api.js" defer></script>
+  <script src="js/orders-api.js" defer></script>
+  <script src="js/cart.js" defer></script>
+  <script src="js/layout.js" defer></script>
+  <script src="js/compte.js" defer></script>
+</head>
+<body>
+  <header class="header" id="site-header"></header>
+
+  <main class="main--narrow">
+    <h1>Mon compte</h1>
+    <p class="subtitle">Vos informations et votre mot de passe.</p>
+
+    <section class="card profile" id="profile" aria-live="polite"></section>
+
+    <a class="card account-link" href="reservations.html">
+      <span>
+        <span class="account-link__title">Mes réservations</span>
+        <span class="account-link__sub" id="reservations-summary">Commandes à récupérer et historique</span>
+      </span>
+      <span aria-hidden="true">→</span>
+    </a>
+
+    <form class="card auth-card" id="password-form" novalidate>
+      <h2 class="card__title">Changer de mot de passe</h2>
+      <div class="auth-card__body">
+        <label class="field">
+          <span class="field__label">Mot de passe actuel</span>
+          <input class="input" name="old_password" type="password" autocomplete="current-password" required>
+        </label>
+        <label class="field">
+          <span class="field__label">Nouveau mot de passe <span>(8 caractères minimum)</span></span>
+          <input class="input" name="new_password" type="password" autocomplete="new-password" minlength="8" required>
+        </label>
+        <label class="field">
+          <span class="field__label">Confirmer le nouveau mot de passe</span>
+          <input class="input" name="confirm" type="password" autocomplete="new-password" minlength="8" required>
+        </label>
+        <p class="state state--error form-error" id="password-error" hidden></p>
+        <p class="flash" id="password-ok" role="status" hidden>Mot de passe modifié.</p>
+        <button class="btn btn--primary btn--block" type="submit">Changer le mot de passe</button>
+      </div>
+    </form>
+
+    <button class="btn btn--outline" type="button" id="logout">Se déconnecter</button>
+  </main>
+
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Commandes — Kfet Polytech Dijon</title>
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Scripts communs (ordre important), puis le script de la page -->
+  <script src="js/api.js" defer></script>
+  <script src="js/utils.js" defer></script>
+  <script src="js/mock.js" defer></script>
+  <script src="js/auth.js" defer></script>
+  <script src="js/catalog-api.js" defer></script>
+  <script src="js/orders-api.js" defer></script>
+  <script src="js/cart.js" defer></script>
+  <script src="js/layout.js" defer></script>
+  <script src="js/qrcode.js" defer></script>
+  <script src="js/admin-scanner.js" defer></script>
+  <script src="js/admin-commandes.js" defer></script>
+</head>
+<body>
+  <header class="header" id="site-header"></header>
+
+  <main>
+    <nav class="subnav" data-subnav="admin"></nav>
+
+    <h1>Commandes</h1>
+    <p class="subtitle">Les réservations à préparer, et la validation au moment du retrait (le paiement se fait sur place).</p>
+
+    <!-- Validation rapide : n° de commande ou contenu du QR code -->
+    <form class="quick-check" id="quick-check" novalidate>
+      <label class="quick-check__label" for="quick-input">Valider un retrait</label>
+      <input class="input" id="quick-input" type="text" autocomplete="off" placeholder="N° de commande ou code du QR (KFET-RES-…)">
+      <button class="btn btn--primary" type="submit">Valider</button>
+      <button class="btn quick-check__scan" type="button" id="open-scanner">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8V5a2 2 0 0 1 2-2h3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M7 12h10"/></svg>
+        Scanner
+      </button>
+    </form>
+
+    <p class="flash" id="flash" role="status" hidden></p>
+
+    <div class="toolbar">
+      <button class="btn" id="prev-day" type="button" aria-label="Jour précédent">←</button>
+      <span class="toolbar__title" id="day-label"></span>
+      <button class="btn" id="next-day" type="button" aria-label="Jour suivant">→</button>
+      <button class="btn" id="today" type="button">Aujourd'hui</button>
+      <button class="btn" id="all-days" type="button">Toutes les dates</button>
+    </div>
+
+    <p class="filter-chip" id="user-filter" hidden></p>
+
+    <div class="stats" id="stats"></div>
+
+    <div class="toolbar">
+      <input class="input" id="search" type="search" placeholder="Rechercher un client ou un n°…" aria-label="Rechercher un client ou un numéro de commande">
+      <label class="toolbar__field">Statut
+        <select class="input input--select" id="status" aria-label="Filtrer par statut">
+          <option value="">Tous</option>
+          <option value="pending" selected>À retirer</option>
+          <option value="completed">Retirées</option>
+          <option value="no_show">Non retirées</option>
+        </select>
+      </label>
+    </div>
+
+    <section class="admin-list" id="orders" aria-live="polite"></section>
+  </main>
+
+  <!-- Scanner de QR code -->
+  <dialog class="dialog scanner" id="scan-dialog" aria-labelledby="scan-title">
+    <div class="dialog__head">
+      <h2 id="scan-title">Scanner un QR code</h2>
+      <button class="btn" type="button" data-close aria-label="Fermer">✕</button>
+    </div>
+
+    <!-- Étape 1 : caméra -->
+    <div class="scanner__step" id="scan-step-camera">
+      <div class="scanner__view">
+        <video class="scanner__video" id="scan-video" playsinline muted></video>
+        <div class="scanner__placeholder" id="scan-placeholder">
+          <svg viewBox="0 0 24 24" width="48" height="48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          <p id="scan-placeholder-text">Activation de la caméra…</p>
+        </div>
+        <div class="scanner__frame" aria-hidden="true"><span></span><span></span><span></span><span></span><i class="scanner__line"></i></div>
+      </div>
+      <p class="scanner__hint">Placez le QR code du client dans le cadre.</p>
+      <div class="dialog__foot">
+        <button class="btn" type="button" data-close>Annuler</button>
+        <button class="btn btn--primary" type="button" id="simulate-scan">Simuler un scan</button>
+      </div>
+    </div>
+
+    <!-- Étape 2 : commande reconnue -->
+    <div class="scanner__step" id="scan-step-result" hidden>
+      <div class="dialog__body" id="scan-result"></div>
+      <div class="dialog__foot" id="scan-result-actions"></div>
+    </div>
+  </dialog>
+</body>
+</html>
