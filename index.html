@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Planning — Kfet Polytech Dijon</title>
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Scripts communs (ordre important), puis le script de la page -->
+  <script src="js/api.js" defer></script>
+  <script src="js/utils.js" defer></script>
+  <script src="js/mock.js" defer></script>
+  <script src="js/auth.js" defer></script>
+  <script src="js/catalog-api.js" defer></script>
+  <script src="js/orders-api.js" defer></script>
+  <script src="js/cart.js" defer></script>
+  <script src="js/layout.js" defer></script>
+  <script src="js/planning.js" defer></script>
+</head>
+<body>
+  <header class="header" id="site-header"></header>
+
+  <main>
+    <h1>Planning</h1>
+    <p class="subtitle">Les 7 prochains jours : ouverture et menus disponibles à la Kfet.</p>
+
+    <div class="toolbar">
+      <button class="btn" id="prev-week" type="button">← Précédent</button>
+      <span class="toolbar__title" id="week-label"></span>
+      <button class="btn" id="next-week" type="button">Suivant →</button>
+      <button class="btn btn--primary" id="this-week" type="button">Aujourd'hui</button>
+    </div>
+
+    <section class="week" id="planning" aria-live="polite"></section>
+  </main>
+</body>
+</html>

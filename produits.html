@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Produits — Kfet Polytech Dijon</title>
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Scripts communs (ordre important), puis le script de la page -->
+  <script src="js/api.js" defer></script>
+  <script src="js/utils.js" defer></script>
+  <script src="js/mock.js" defer></script>
+  <script src="js/auth.js" defer></script>
+  <script src="js/catalog-api.js" defer></script>
+  <script src="js/orders-api.js" defer></script>
+  <script src="js/cart.js" defer></script>
+  <script src="js/layout.js" defer></script>
+  <script src="js/produits.js" defer></script>
+</head>
+<body>
+  <header class="header" id="site-header"></header>
+
+  <main>
+    <h1>Nos produits</h1>
+    <p class="subtitle">Tout ce que vous pouvez réserver, avec le stock en temps réel.</p>
+
+    <div class="toolbar">
+      <input class="input" id="search" type="search" placeholder="Rechercher un produit…" aria-label="Rechercher un produit">
+      <label><input type="checkbox" id="only-available"> Disponibles uniquement</label>
+    </div>
+
+    <section class="grid" id="products" aria-live="polite"></section>
+  </main>
+</body>
+</html>

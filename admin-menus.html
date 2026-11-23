@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gestion des menus — Kfet Polytech Dijon</title>
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Scripts communs (ordre important), puis le script de la page -->
+  <script src="js/api.js" defer></script>
+  <script src="js/utils.js" defer></script>
+  <script src="js/mock.js" defer></script>
+  <script src="js/auth.js" defer></script>
+  <script src="js/catalog-api.js" defer></script>
+  <script src="js/orders-api.js" defer></script>
+  <script src="js/cart.js" defer></script>
+  <script src="js/layout.js" defer></script>
+  <script src="js/admin-menus.js" defer></script>
+</head>
+<body>
+  <header class="header" id="site-header"></header>
+
+  <main>
+    <nav class="subnav" data-subnav="admin"></nav>
+
+    <h1>Gestion des menus</h1>
+    <p class="subtitle">Créer, modifier ou supprimer les formules proposées à la Kfet.</p>
+
+    <div class="toolbar">
+      <input class="input" id="search" type="search" placeholder="Rechercher un menu…" aria-label="Rechercher un menu">
+      <label><input type="checkbox" id="hide-past"> Masquer les terminés</label>
+      <button class="btn btn--primary" id="new-menu" type="button">+ Nouveau menu</button>
+    </div>
+
+    <p class="flash" id="flash" role="status" hidden></p>
+
+    <section class="admin-list" id="menus" aria-live="polite"></section>
+  </main>
+
+  <!-- Formulaire création / modification -->
+  <dialog class="dialog" id="menu-dialog" aria-labelledby="dialog-title">
+    <form id="menu-form" novalidate>
+      <div class="dialog__head">
+        <h2 id="dialog-title">Nouveau menu</h2>
+        <button class="btn" type="button" data-close aria-label="Fermer">✕</button>
+      </div>
+
+      <div class="dialog__body">
+        <label class="field">
+          <span class="field__label">Nom</span>
+          <input class="input" name="name" type="text" required maxlength="100" placeholder="Menu du jour">
+        </label>
+
+        <div class="field-row">
+          <label class="field">
+            <span class="field__label">Prix (€)</span>
+            <input class="input" name="price" type="number" required min="0" step="0.05" placeholder="4,00">
+          </label>
+          <label class="field">
+            <span class="field__label">Début</span>
+            <input class="input" name="start_date" type="date" required>
+          </label>
+          <label class="field">
+            <span class="field__label">Fin</span>
+            <input class="input" name="end_date" type="date" required>
+          </label>
+        </div>
+
+        <fieldset class="field picker">
+          <legend class="field__label">Produits <span id="picked-count"></span></legend>
+          <input class="input picker__search" id="product-search" type="search" placeholder="Filtrer les produits…" aria-label="Filtrer les produits">
+          <div class="picker__list" id="product-list"></div>
+        </fieldset>
+
+        <p class="summary" id="summary"></p>
+        <p class="state state--error form-error" id="form-error" hidden></p>
+      </div>
+
+      <div class="dialog__foot">
+        <button class="btn" type="button" data-close>Annuler</button>
+        <button class="btn btn--primary" type="submit" id="submit-btn">Enregistrer</button>
+      </div>
+    </form>
+  </dialog>
+</body>
+</html>

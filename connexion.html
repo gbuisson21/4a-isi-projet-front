@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Connexion — Kfet Polytech Dijon</title>
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Scripts communs (ordre important), puis le script de la page -->
+  <script src="js/api.js" defer></script>
+  <script src="js/utils.js" defer></script>
+  <script src="js/mock.js" defer></script>
+  <script src="js/auth.js" defer></script>
+  <script src="js/catalog-api.js" defer></script>
+  <script src="js/orders-api.js" defer></script>
+  <script src="js/cart.js" defer></script>
+  <script src="js/layout.js" defer></script>
+  <script src="js/connexion.js" defer></script>
+</head>
+<body>
+  <header class="header" id="site-header"></header>
+
+  <main class="main--narrow">
+    <h1>Connexion</h1>
+    <p class="subtitle">Connectez-vous pour réserver vos repas, ou créez un compte en 10 secondes.</p>
+
+    <!-- Déjà connecté -->
+    <section class="card auth-card" id="already" hidden>
+      <p class="auth-card__lead">Vous êtes connecté en tant que <strong id="already-name"></strong>.</p>
+      <div class="auth-card__actions">
+        <a class="btn btn--primary" href="compte.html">Mon compte</a>
+        <button class="btn" type="button" id="already-logout">Se déconnecter</button>
+      </div>
+    </section>
+
+    <section class="card auth-card" id="auth" hidden>
+      <div class="tabs" role="tablist">
+        <button class="tabs__tab" type="button" role="tab" id="tab-login" aria-controls="login-form" aria-selected="true">Se connecter</button>
+        <button class="tabs__tab" type="button" role="tab" id="tab-register" aria-controls="register-panel" aria-selected="false">Créer un compte</button>
+      </div>
+
+      <!-- Connexion -->
+      <form class="auth-card__body" id="login-form" role="tabpanel" aria-labelledby="tab-login" novalidate>
+        <label class="field">
+          <span class="field__label">Nom d'utilisateur</span>
+          <input class="input" name="username" type="text" autocomplete="username" required autofocus>
+        </label>
+        <label class="field">
+          <span class="field__label">Mot de passe</span>
+          <span class="password">
+            <input class="input" name="password" type="password" autocomplete="current-password" required>
+            <button class="btn password__toggle" type="button" aria-label="Afficher le mot de passe">Voir</button>
+          </span>
+        </label>
+        <p class="state state--error form-error" id="login-error" hidden></p>
+        <button class="btn btn--primary btn--block" type="submit">Se connecter</button>
+        <p class="auth-card__hint">Pas encore de compte ? <a href="#" data-goto="register">Créez-en un</a>.</p>
+      </form>
+
+      <!-- Création de compte -->
+      <div class="auth-card__body" id="register-panel" role="tabpanel" aria-labelledby="tab-register" hidden>
+        <form id="register-form" novalidate>
+          <p class="auth-card__hint auth-card__hint--top">
+            Choisissez un nom d'utilisateur : le mot de passe est généré automatiquement
+            et <strong>ne sera affiché qu'une seule fois</strong>.
+          </p>
+          <label class="field">
+            <span class="field__label">Nom d'utilisateur <span>(3 à 30 caractères)</span></span>
+            <input class="input" name="username" type="text" autocomplete="username" minlength="3" maxlength="30" required>
+          </label>
+          <p class="state state--error form-error" id="register-error" hidden></p>
+          <button class="btn btn--primary btn--block" type="submit">Créer mon compte</button>
+        </form>
+
+        <!-- Résultat : mot de passe généré -->
+        <div class="created" id="created" hidden>
+          <p class="created__title">Compte créé !</p>
+          <p>Voici vos identifiants. <strong>Notez le mot de passe maintenant</strong> : il ne pourra plus être affiché.</p>
+          <dl class="created__creds">
+            <dt>Utilisateur</dt><dd id="created-username"></dd>
+            <dt>Mot de passe</dt><dd><code id="created-password"></code></dd>
+          </dl>
+          <div class="auth-card__actions">
+            <button class="btn" type="button" id="copy-password">Copier le mot de passe</button>
+            <button class="btn btn--primary" type="button" id="created-login">Me connecter</button>
+          </div>
+          <p class="auth-card__hint">Vous pourrez le changer depuis « Mon compte ».</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
